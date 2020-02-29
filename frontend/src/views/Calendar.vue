@@ -1,9 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <p>Routerlänken till komponenten Calendar.vue fungerar</p>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Calendar"
+};
 </script>
 
 <style lang="scss" scoped>

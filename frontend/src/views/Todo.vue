@@ -1,9 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <p>Routerlänken till komponenten Todo.vue fungerar</p>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Todo"
+};
 </script>
 
 <style lang="scss" scoped>

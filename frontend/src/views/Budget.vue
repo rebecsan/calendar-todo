@@ -1,9 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <p>Routerlänken till komponenten Budget.vue fungerar</p>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Budget"
+};
 </script>
 
 <style scoped>

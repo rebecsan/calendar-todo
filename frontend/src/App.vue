@@ -1,6 +1,14 @@
 <template>
   <div id="app">
-    <p>Test</p>
+    <p>Här i App.vue komponenten kan vi ha det innehåll som vi vill ska finnas med på alla sidor (t.ex navbar och footer)</p>
+
+    <nav>
+      <router-link class="router-link" :to="{name: 'Home'}" exact>Hem</router-link>
+      <router-link class="router-link" to="/Todo" exact>Todo</router-link>
+      <router-link class="router-link" to="/Calender" exact>Kalender</router-link>
+      <router-link class="router-link" to="/Budget" exact>Budget</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
 
   <!-- VUETIFY -->
