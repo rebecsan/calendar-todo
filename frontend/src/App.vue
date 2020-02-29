@@ -1,5 +1,10 @@
 <template>
-  <v-app>
+  <div id="app">
+    <p>Test</p>
+  </div>
+
+  <!-- VUETIFY -->
+  <!-- <v-app>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
@@ -32,17 +37,17 @@
     <v-content>
       <HelloWorld />
     </v-content>
-  </v-app>
+  </v-app>-->
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+// import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld
+    //HelloWorld
   },
 
   data: () => ({
