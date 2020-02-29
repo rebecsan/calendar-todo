@@ -63,3 +63,83 @@ export default {
   })
 };
 </script>
+
+<style>
+/* CSS RESET */
+
+/* Box Sizing 
+---------------*/
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Reset margins and paddings on most elements 
+------------------------------------------------*/
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+p,
+pre,
+blockquote,
+figure,
+hr {
+  margin: 0;
+  padding: 0;
+}
+
+/* Removes discs from ul 
+---------------------------*/
+ul {
+  list-style: none;
+}
+
+/* Forms and buttons 
+-----------------------*/
+input,
+textarea,
+select,
+button {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+input,
+textarea,
+button {
+  border: 1px solid gray;
+}
+
+button {
+  border-radius: 0;
+  padding: 0.75em 1em;
+  background-color: transparent;
+}
+
+button * {
+  pointer-events: none;
+}
+
+/* Media Elements 
+--------------------*/
+embed,
+iframe,
+img,
+object,
+video {
+  display: block;
+  max-width: 100%;
+}
+</style>
