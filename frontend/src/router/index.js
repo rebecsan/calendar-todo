@@ -16,7 +16,7 @@ const routes = [{
     name: 'Todo',
     component: Todo
   }, {
-    path: '/calender',
+    path: '/calendar',
     name: 'Kalender',
     component: Calendar
   }, {
