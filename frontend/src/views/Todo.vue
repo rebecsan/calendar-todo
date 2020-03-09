@@ -1,21 +1,24 @@
 <template>
   <div>
     <h1>My todo-lists</h1>
-    <v-text-field
-      class="new-list" 
-      @keyup.enter="addList" 
-      v-model="listName" 
-      dense 
-      clearable>
-    </v-text-field>
-    <v-btn 
-      class="add-new-list" 
-      @click="addList" 
-      outlined 
-      color="black">Add new list</v-btn>
+    <form>
+      <v-text-field
+        class="new-list" 
+        @keydown.enter.prevent="addList" 
+        v-model="listName" 
+        dense 
+        clearable>
+      </v-text-field>
+      <v-btn 
+        class="add-new-list" 
+        @click.prevent="addList" 
+        outlined 
+        color="black">Add new list
+      </v-btn>
+    </form>
     <ul>
-      <li v-for="list in lists" :key="list.id">
-        {{ list }}
+      <li v-for="item in lists" :key="item.id">
+        {{ item }}
         <v-btn outlined icon small>+</v-btn>
         <v-btn outlined icon small>x</v-btn>
       </li>
@@ -26,24 +29,45 @@
 <script>
 export default {
   name: "Todo",
+  created() {
+    this.renderLists()
+  },
   data() {
     return {
+      // inputs: [],
       lists: [],
-      listName: null
+      listName: null,
+      listNames: null
     }
   },
   methods: {
-    addList() {
+    addList() { 
+      fetch('http://localhost:3000/todo', {
+        // body: '{"name": "Baka"}',
+        body: '{"name": "' + this.listName + '"}',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST'
+      })
+      // this.renderLists()
       this.lists.push(this.listName);
       this.listName=''
-      // app.post('/', (request, response) => {
-      //   database.run('INSERT INTO listNames VALUES ($name)', {
-      //     $name: request.body.name,
-      //   })
-      //   .then(() => {
-      //     response.send()
-      //   })
+      //   .then(response => response.json())
+      //   .then(result => {
+      //     console.log(this.listName)
+      //     console.log(result)
+      //     // this.inputs = result;
       // })
+    },
+    renderLists() {
+      fetch('http://localhost:3000/todo')
+        .then(response => response.json())
+        .then(result => {
+         for(let i = 0; i < result.length; i++) {
+           this.lists.push(result[i].name)
+         }
+        })
     }
   }
 };
