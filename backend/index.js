@@ -9,7 +9,7 @@ app.use(cors())
 
 let database
 // hämtar värden i en databas. 
-sqlite.open('calendar.sqlite').then(database_ => {
+sqlite.open('database.sqlite').then(database_ => {
   database = database_
   })
   app.get('/', (request, response) => {
