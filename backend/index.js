@@ -60,6 +60,4 @@ sqlite.open('database.sqlite').then(database_ => {
       })
   })
 
-
-
 app.listen(3000)
