@@ -5,22 +5,45 @@
       <input type="text" v-model="addedAmount" />
       <input type="submit" @click.prevent="onClick" />
     </form>
-    <p>{{addedActivity}}: {{addedAmount}}</p>
-    <div id="status"></div>
+    <ul>
+      <li
+        @click.prevent="deleteItem"
+        v-for="budgetItem in budget"
+        :key="budgetItem.id"
+      >{{budgetItem.activity}}: {{budgetItem.amount}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: "Budget",
+  created() {
+    this.renderBudgetList();
+  },
   data() {
     return {
-      inputs: [],
       addedActivity: null,
-      addedAmount: null
+      addedAmount: null,
+      budget: null
     };
   },
   methods: {
+    deleteItem() {
+      fetch("http://localhost:3000/budget", {
+        body:
+          '{"activity": "' +
+          this.addedActivity +
+          '"' +
+          ', "amount": "' +
+          this.addedAmount +
+          '"}',
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+    },
     onClick() {
       this.postData();
     },
@@ -38,6 +61,13 @@ export default {
           "Content-Type": "application/json"
         }
       });
+    },
+    renderBudgetList() {
+      fetch("http://localhost:3000/budget")
+        .then(response => response.json())
+        .then(result => {
+          this.budget = result;
+        });
     }
   }
 };

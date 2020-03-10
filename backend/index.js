@@ -26,11 +26,21 @@ app.post('/budget', (request, response) => {
     })
 })
 
-app.get('/', (request, response) => {
-  database.all('SELECT * FROM budget').then(budget => {
-    console.log(budget)
-    response.send(budget)
-  })
+app.get('/budget', (request, response) => {
+  database.all('SELECT * FROM budget')
+    .then(rows => {
+      response.send(rows)
+    })
+})
+
+app.delete('/budget', (request, response) => {
+  database.run('DELETE FROM budget WHERE ($activity, $amount)', {
+      $activity: request.body.activity,
+      $amount: request.body.amount
+    })
+    .then(() => {
+      response.send()
+    })
 })
 
 //Rebecca
