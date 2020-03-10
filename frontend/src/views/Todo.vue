@@ -17,8 +17,9 @@
       </v-btn>
     </form>
     <ul>
-      <li v-for="list in lists" :key="list.id">
-        {{ list }}
+
+      <li v-for="item in lists" :key="item.id">
+        {{ item }}
         <v-btn outlined icon small>+</v-btn>
         <v-btn outlined icon small>x</v-btn>
       </li>
@@ -29,32 +30,44 @@
 <script>
 export default {
   name: "Todo",
+
+  created() {
+    this.renderLists()
+  },
+
   data() {
     return {
       // inputs: [],
       lists: [],
-      listName: null
+
+      listName: null,
+      listNames: null
     }
   },
   methods: {
-    addList() {
-      this.lists.push(this.listName);
-      // this.listName=''
-      console.log(this.listName)
+    addList() { 
       fetch('http://localhost:3000/todo', {
-        // body: '{"name": "Baka"}',
         body: '{"name": "' + this.listName + '"}',
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST'
       })
+
+
+      this.lists.push(this.listName);
+      this.listName=''
+    },
+    
+    renderLists() {
+      fetch('http://localhost:3000/todo')
         .then(response => response.json())
         .then(result => {
-          console.log(this.listName)
-          console.log(result)
-          // this.inputs = result;
-      })
+         for(let i = 0; i < result.length; i++) {
+           this.lists.push(result[i].name)
+         }
+        })
+
     }
   }
 };
