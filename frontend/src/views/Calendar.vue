@@ -2,7 +2,7 @@
   <div id="app">
   <form>
     <label for="name">New activity:</label>
-    <input type="text" id="name" name="name">
+    <input v-model="listName" value="listName" type="text" id="name" name="name">
     <label for="dateStart">Date start:</label>
     <input type="date" id="dateStart" name="dateStart">
     <label for="dateEnd">Date end:</label>
@@ -20,7 +20,7 @@
           <option value="school">School</option>
           <option value="vaycay">Vaycay</option>
         </select>
-    <input type="submit" value="Lägg till">
+    <input @click.prevent="addList" type="submit" value="Lägg till">
       
   </form>
 
@@ -34,6 +34,46 @@
 <script>
 export default {
   name: "App",
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   fetch("http://localhost:3000/", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //     id: this.state.id,
+  //     item: this.state.item,
+  //     itemType: this.state.itemType
+  //   })
+  //   })
+  // },
+   methods: {
+    addList() {
+      //this.activities.push(this.listName);
+      // this.listName=''
+      console.log(this.listName)
+      fetch('http://localhost:3000/calender', {
+        method: 'POST',
+        body: JSON.stringify({
+        name: this.listName,
+        // item: this.state.item,
+        // itemType: this.state.itemType
+    }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        
+      })
+        .then(response => response.json())
+        .then(result => {
+          console.log(this.listName)
+          console.log(result)
+          // this.inputs = result;
+      })
+    }
+  },
   created() {
     fetch("http://localhost:3000/")
       .then(response => response.json())
@@ -43,7 +83,8 @@ export default {
   },
   data() {
     return {
-      activities: null
+      activities: [],
+      listName: null
     };
   },
 };
