@@ -55,14 +55,14 @@ app.post('/todo', (request, response) => {
 
 
 //Josefin
-app.get('/', (request, response) => {
+app.get('/calendar', (request, response) => {
   database.all('SELECT * FROM activities').then(activities => {
     console.log(activities)
     response.send(activities)
   })
 })
 
-app.post('/', (request, response) => {
+app.post('/calendar', (request, response) => {
   database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?)',
       [
         request.body.name,
