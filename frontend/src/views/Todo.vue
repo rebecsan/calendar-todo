@@ -17,6 +17,7 @@
       </v-btn>
     </form>
     <ul>
+
       <li v-for="item in lists" :key="item.id">
         {{ item }}
         <v-btn outlined icon small>+</v-btn>
@@ -29,13 +30,16 @@
 <script>
 export default {
   name: "Todo",
+
   created() {
     this.renderLists()
   },
+
   data() {
     return {
       // inputs: [],
       lists: [],
+
       listName: null,
       listNames: null
     }
@@ -50,6 +54,7 @@ export default {
         method: 'POST'
       })
 
+
       this.lists.push(this.listName);
       this.listName=''
     },
@@ -62,6 +67,7 @@ export default {
            this.lists.push(result[i].name)
          }
         })
+
     }
   }
 };
