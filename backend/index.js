@@ -42,10 +42,21 @@ app.get('/todo', (request, response) => {
     })
 })
 
+app.delete('/todo/:id', (request, response) => {
+  database.run('DELETE FROM todoLists WHERE id=$id', {
+    $id: request.params.id
+  })
+  .then(() => {
+    console.log(request.params.id)
+    response.send()
+  })
+})
+
 app.post('/todo', (request, response) => {
   // console.log(request.body.name + 'POST')
-  database.run('INSERT INTO todoLists VALUES ($name)', {
-      $name: request.body.name
+  database.run('INSERT INTO todoLists VALUES ($name, $id)', {
+      $name: request.body.name,
+      $id: request.body.id
     })
     .then(() => {
       response.send()
