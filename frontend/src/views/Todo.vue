@@ -43,23 +43,17 @@ export default {
   methods: {
     addList() { 
       fetch('http://localhost:3000/todo', {
-        // body: '{"name": "Baka"}',
         body: '{"name": "' + this.listName + '"}',
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST'
       })
-      // this.renderLists()
+
       this.lists.push(this.listName);
       this.listName=''
-      //   .then(response => response.json())
-      //   .then(result => {
-      //     console.log(this.listName)
-      //     console.log(result)
-      //     // this.inputs = result;
-      // })
     },
+    
     renderLists() {
       fetch('http://localhost:3000/todo')
         .then(response => response.json())

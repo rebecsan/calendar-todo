@@ -44,7 +44,6 @@ sqlite.open('database.sqlite').then(database_ => {
   app.get('/todo', (request, response) => {
     database.all('SELECT * FROM todoLists')
     .then(rows => {
-      // console.log(rows)
       // console.log(rows.map (row => row.name) + 'GET')
       response.send(rows)
     })
