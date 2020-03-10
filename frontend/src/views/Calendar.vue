@@ -2,7 +2,7 @@
   <div id="app">
   <form>
     <label for="name">New activity:</label>
-    <input v-model="listName" value="listName" type="text" id="name" name="name">
+    <input type="text" id="name" name="name">
     <label for="dateStart">Date start:</label>
     <input type="date" id="dateStart" name="dateStart">
     <label for="dateEnd">Date end:</label>
@@ -12,15 +12,15 @@
     <input type="time" id="startTime" name="startTime">
     <label for="time">Select a endtime:</label>
     <input type="time" id="endTime" name="endTime">
-    <label for="cars">Category:</label>
+    <label for="category">Category:</label>
 
-        <select id="cars">
+        <select id="category">
           <option value="workout">Workout</option>
           <option value="work">Work</option>
           <option value="school">School</option>
           <option value="vaycay">Vaycay</option>
         </select>
-    <input @click.prevent="addList" type="submit" value="Lägg till">
+    <input type="submit" value="Lägg till">
       
   </form>
 
@@ -49,43 +49,22 @@ export default {
   //   })
   //   })
   // },
-   methods: {
-    addList() {
-      //this.activities.push(this.listName);
-      // this.listName=''
-      console.log(this.listName)
-      fetch('http://localhost:3000/calender', {
-        method: 'POST',
-        body: JSON.stringify({
-        name: this.listName,
-        // item: this.state.item,
-        // itemType: this.state.itemType
-    }),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        
-      })
-        .then(response => response.json())
-        .then(result => {
-          console.log(this.listName)
-          console.log(result)
-          // this.inputs = result;
-      })
+
+  data() {
+    return {
+   
+    
+      activities: null,
+      
     }
   },
+  
   created() {
     fetch("http://localhost:3000/")
       .then(response => response.json())
       .then(result => {
         this.activities = result;
       });
-  },
-  data() {
-    return {
-      activities: [],
-      listName: null
-    };
   },
 };
 

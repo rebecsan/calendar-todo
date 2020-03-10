@@ -12,35 +12,32 @@ let database
 sqlite.open('database.sqlite').then(database_ => {
   database = database_
   })
-  // app.get('/', (request, response) => {
-  //   database.all('SELECT * FROM activities').then(activities => {
-  //     console.log(activities)
-  //     response.send(activities) 
-      
-  //   })
-  // })
 
-  // app.post('/', (request, response) => {
-  //   database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?)', 
-  //   [
-  //   request.body.name,
-  //   request.body.dateStart,
-  //   request.body.dateEnd,
-  //   request.body.timeStart, 
-  //   request.body.timeEnd 
-  //   ])
-  //     .then(() => {
-  //       response.send() 
+  app.get('/calendar', (request, response) => {
+    database.all('SELECT * FROM activities').then(activities => {
+      console.log(activities)
+      response.send(activities) 
+      
+    })
+  })
+
+  app.post('/calendar', (request, response) => {
+    database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?)', 
+    [
+    request.body.name,
+    request.body.dateStart,
+    request.body.dateEnd,
+    request.body.timeStart, 
+    request.body.timeEnd 
+    ])
+      .then(() => {
+        response.send() 
           
         
-  //     })
-    
+      })
+
   
-    
-  //     // $name: request.body.name
-  //     // $population: request.body.population
   
-  // })
   app.get('/todo', (request, response) => {
     database.all('SELECT * FROM todoLists')
     .then(rows => {
@@ -60,6 +57,6 @@ sqlite.open('database.sqlite').then(database_ => {
       })
   })
 
+  })
 
-
-app.listen(8080)
+app.listen(3000)
