@@ -37,68 +37,59 @@ app.get('/budget', (request, response) => {
     })
 })
 
-app.delete('/budget', (request, response) => {
-      database.run('DELETE FROM budget WHERE ($activity, $amount)', {
-          $activity: request.body.activity,
-          $amount: request.body.amount
-        })
-        .then(() => {
-          response.send()
-        })
+
+//Rebecca
+app.get('/todo', (request, response) => {
+  database.all('SELECT * FROM todoLists')
+    .then(rows => {
+      // console.log(rows.map (row => row.name) + 'GET')
+      response.send(rows)
+    })
+})
+
+app.post('/todo', (request, response) => {
+  // console.log(request.body.name + 'POST')
+  database.run('INSERT INTO todoLists VALUES ($name)', {
+      $name: request.body.name
+    })
+    .then(() => {
+      response.send()
+    })
+})
 
 
-      //Rebecca
-      app.get('/todo', (request, response) => {
-        database.all('SELECT * FROM todoLists')
-          .then(rows => {
-            // console.log(rows.map (row => row.name) + 'GET')
-            response.send(rows)
-          })
-      })
+//Josefin
+app.get('/calendar', (request, response) => {
+  database.all('SELECT * FROM activities').then(activities => {
+    console.log(activities)
+    response.send(activities)
+  })
+})
 
-      app.post('/todo', (request, response) => {
-        // console.log(request.body.name + 'POST')
-        database.run('INSERT INTO todoLists VALUES ($name)', {
-            $name: request.body.name
-          })
-          .then(() => {
-            response.send()
-          })
-      })
+app.post('/calendar', (request, response) => {
+  database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?)',
+      [
+        request.body.name,
+        request.body.dateStart,
+        request.body.dateEnd,
+        request.body.timeStart,
+        request.body.timeEnd,
+        request.body.id
 
+      ])
+    .then(() => {
+      response.send()
+    })
+})
 
-      //Josefin
-      app.get('/calendar', (request, response) => {
-        database.all('SELECT * FROM activities').then(activities => {
-          console.log(activities)
-          response.send(activities)
-        })
-      })
-
-      app.post('/calendar', (request, response) => {
-        database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?)',
-            [
-              request.body.name,
-              request.body.dateStart,
-              request.body.dateEnd,
-              request.body.timeStart,
-              request.body.timeEnd,
-              request.body.id
-
-            ])
-          .then(() => {
-            response.send()
-          })
-      })
-
-      app.delete('/calendar/:id', (request, response) => {
-        database.run('DELETE FROM activities WHERE id=?', [request.params.id]).then(() => {
-          console.log(request.params.id)
-          response.send()
-        })
-      })
+app.delete('/calendar/:id', (request, response) => {
+  database.run('DELETE FROM activities WHERE id=?', [request.params.id]).then(() => {
+    console.log(request.params.id)
+    response.send()
+  })
+})
 
 
-      app.listen(3000, () => {
-        console.log("server started");
-      })
+app.listen(3000, () => {
+  console.log("server started");
+})
