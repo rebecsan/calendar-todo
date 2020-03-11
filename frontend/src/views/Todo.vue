@@ -18,7 +18,7 @@
     </form>
     <ul>
       <li v-for="item in lists" :key="item.id">
-        {{ item.name ? item.name :item }}
+        <span @click="updateList(item.id)">{{ item.name ? item.name :item }}</span>
         <v-btn outlined icon small>+</v-btn>
         <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
       </li>
@@ -30,7 +30,7 @@
 export default {
   name: "Todo",
   created() {
-    this.renderLists()
+      this.renderLists()
   },
   data() {
     return {
@@ -55,11 +55,9 @@ export default {
     },
 
     deleteList(id) {
-      fetch('http://localhost:3000/todo/' +id, {
+      fetch('http://localhost:3000/todo/' + id, {
         method: 'DELETE'
       }).then(response => {
-        console.log(Request)
-        console.log(response + 'Hej')
         this.renderLists()
       })
     },
@@ -69,10 +67,24 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.lists = result
-        //  for(let i = 0; i < result.length; i++) {
-        //    this.lists.push(result[i].name)
-        //  }
         })
+    },
+
+    updateList(id) { 
+      fetch('http://localhost:3000/todo/' + id, {
+        body: JSON.stringify({newName: this.newName}),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT'
+      })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+      })
+      .then(() => {this.renderLists()
+      })
+      this.newName=''
     }
   }
 };

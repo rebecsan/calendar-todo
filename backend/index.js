@@ -47,7 +47,6 @@ app.delete('/todo/:id', (request, response) => {
     $id: request.params.id
   })
   .then(() => {
-    console.log(request.params.id)
     response.send()
   })
 })
@@ -61,6 +60,18 @@ app.post('/todo', (request, response) => {
     .then(() => {
       response.send()
     })
+})
+
+app.put('/todo/:id', (request, response) => {
+  console.log('Fetch funkar')
+  database.run('UPDATE todolists SET name=$newName WHERE id=$id', {
+    $id: request.params.id,
+    $newName: request.body.name,
+  })
+  .then(() => {
+    console.log(request.params.id)
+    response.send()
+  })
 })
 
 
