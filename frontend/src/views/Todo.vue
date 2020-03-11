@@ -19,9 +19,9 @@
     <ul>
 
       <li v-for="item in lists" :key="item.id">
-        {{ item }}
+        {{ item.name ? item.name :item }}
         <v-btn outlined icon small>+</v-btn>
-        <v-btn outlined icon small>x</v-btn>
+        <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
       </li>
     </ul>
   </div>
@@ -47,25 +47,37 @@ export default {
   methods: {
     addList() { 
       fetch('http://localhost:3000/todo', {
-        body: '{"name": "' + this.listName + '"}',
+        body: JSON.stringify({name: this.listName}),
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST'
       })
+      
+      .then(() => {this.renderLists()});
+      this.lists.push(this.listName)
 
-
-      this.lists.push(this.listName);
       this.listName=''
+    },
+
+    deleteList(id) {
+      fetch('http://localhost:3000/todo/' +id, {
+        method: 'DELETE'
+      }).then(response => {
+        console.log(Request)
+        console.log(response + 'Hej')
+        this.renderLists()
+      })
     },
     
     renderLists() {
       fetch('http://localhost:3000/todo')
         .then(response => response.json())
         .then(result => {
-         for(let i = 0; i < result.length; i++) {
-           this.lists.push(result[i].name)
-         }
+          this.lists = result
+        //  for(let i = 0; i < result.length; i++) {
+        //    this.lists.push(result[i].name)
+        //  }
         })
 
     }
