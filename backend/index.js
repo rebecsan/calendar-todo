@@ -21,22 +21,23 @@ sqlite.open('database.sqlite').then(database_ => {
 app.post('/budget', (request, response) => {
   console.log(request.body);
   database.run(
-      'INSERT INTO budget VALUES ($activity, $amount)', {
-        $activity: request.body.activity,
-        $amount: request.body.amount
+      'INSERT INTO jan_earnings VALUES ($name, $sum, $id)', {
+        $name: request.body.name,
+        $sum: request.body.sum,
+        $id: request.body.id
       })
     .then(() => {
       response.send()
     })
 })
 
-app.get('/', (request, response) => {
-  database.all('SELECT * FROM budget').then(budget => {
-    console.log(budget)
-    response.send(budget)
-  })
-
+app.get('/budget', (request, response) => {
+  database.all('SELECT * FROM jan_earnings')
+    .then(rows => {
+      response.send(rows)
+    })
 })
+
 
 //Rebecca
 app.get('/todo', (request, response) => {
@@ -49,12 +50,12 @@ app.get('/todo', (request, response) => {
 
 app.delete('/todo/:id', (request, response) => {
   database.run('DELETE FROM todoLists WHERE id=$id', {
-    $id: request.params.id
-  })
-  .then(() => {
-    console.log(request.params.id)
-    response.send()
-  })
+      $id: request.params.id
+    })
+    .then(() => {
+      console.log(request.params.id)
+      response.send()
+    })
 })
 
 app.post('/todo', (request, response) => {
@@ -98,10 +99,6 @@ app.delete('/calendar/:id', (request, response) => {
     console.log(request.params.id)
     response.send()
   })
-
-
-
-
 })
 
 
