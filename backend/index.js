@@ -90,14 +90,15 @@ app.get('/calendar', (request, response) => {
 })
 
 app.post('/calendar', (request, response) => {
-  database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?)',
+  database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?, ?)',
       [
         request.body.name,
         request.body.dateStart,
         request.body.dateEnd,
         request.body.timeStart,
         request.body.timeEnd,
-        request.body.id
+        request.body.id,
+        request.body.note
 
       ])
     .then(() => {
@@ -111,7 +112,6 @@ app.delete('/calendar/:id', (request, response) => {
     response.send()
   })
 })
-
 
 app.listen(3000, () => {
   console.log("server started");
