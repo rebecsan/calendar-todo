@@ -2,50 +2,96 @@
   <div id="app">
   <form>
     <label for="name">New activity:</label>
-    <input type="text" id="name" name="name">
+    <input type="text" v-model="addedActivityName" id="name" name="name">
     <label for="dateStart">Date start:</label>
-    <input type="date" id="dateStart" name="dateStart">
+    <input type="date" v-model="addedDateStart" id="dateStart" name="dateStart">
     <label for="dateEnd">Date end:</label>
-    <input type="date" id="dateEnd" name="dateEnd">
+    <input type="date" v-model="addedDateEnd" id="dateEnd" name="dateEnd">
 
     <label for="time">Select a starttime:</label>
-    <input type="time" id="startTime" name="startTime">
+    <input type="time" v-model="addedStartTime" id="startTime" name="startTime">
     <label for="time">Select a endtime:</label>
-    <input type="time" id="endTime" name="endTime">
-    <label for="cars">Category:</label>
+    <input type="time" v-model="addedEndTime" id="endTime" name="endTime">
+    <label for="category">Category:</label>
 
-        <select id="cars">
-          <option value="workout">Workout</option>
-          <option value="work">Work</option>
-          <option value="school">School</option>
-          <option value="vaycay">Vaycay</option>
-        </select>
-    <input type="submit" value="Lägg till">
+      <select id="category">
+        <option value="addedWorkout">Workout</option>
+        <option value="addedWork">Work</option>
+        <option value="addedSchool">School</option>
+        <option value="addedVaycay">Vaycay</option>
+      </select>
+    <input type="submit" value="Lägg till i kalender" @click.prevent="onClick">
+    
       
   </form>
-
   <ul>
-      <li v-for="activity in activities" :key="activity.id">{{activity}}</li>
-    </ul>
+    <li v-for="activity in activities" :key="activity.id">
+        {{ activity.name }}  {{ activity.dateStart }} {{ activity.timeStart }} - {{ activity.timeEnd }} 
+        <v-btn @click="removeData(activity.id)" outlined icon small>x</v-btn>
+    </li>
+  </ul>
+
+  
 </div>
 
 </template>
 
 <script>
 export default {
-  name: "App",
-  created() {
-    fetch("http://localhost:3000/")
-      .then(response => response.json())
-      .then(result => {
-        this.activities = result;
-      });
-  },
+  name: "Calendar",
+  
   data() {
     return {
-      activities: null
-    };
+      addedActivityName: null,
+      addedDateStart: null,
+      addedDateEnd: null,
+      activities: null,
+      addedStartTime: null,
+      addedEndTime: null,
+      
+    }
   },
+  methods: {
+    onClick() {
+      this.addData().then(() => {this.getData()})
+      
+    },
+    addData() {
+     return fetch("http://localhost:3000/calendar", {
+        body: JSON.stringify ({
+          name: this.addedActivityName,
+          dateStart: this.addedDateStart,
+          dateEnd: this.addedDateEnd,
+          timeStart: this.addedStartTime,
+          timeEnd: this.addedEndTime
+        }),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
+    },
+    
+    removeData(id) {
+      fetch("http://localhost:3000/calendar/" + id, {
+        method: 'DELETE'
+        }).then(response => {
+        this.getData();
+      })
+    },
+    getData () {
+      fetch("http://localhost:3000/calendar")
+        .then(response => response.json())
+        .then(result => {
+          this.activities = result;
+        });
+    }
+  },
+    
+  created() {
+    this.addData();
+  }
+
 };
 
 </script>
