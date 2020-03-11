@@ -21,9 +21,10 @@ sqlite.open('database.sqlite').then(database_ => {
 app.post('/budget', (request, response) => {
   console.log(request.body);
   database.run(
-      'INSERT INTO budget VALUES ($activity, $amount)', {
-        $activity: request.body.activity,
-        $amount: request.body.amount
+      'INSERT INTO jan_earnings VALUES ($name, $sum, $id)', {
+        $name: request.body.name,
+        $sum: request.body.sum,
+        $id: request.body.id
       })
     .then(() => {
       response.send()
@@ -31,12 +32,11 @@ app.post('/budget', (request, response) => {
 })
 
 app.get('/budget', (request, response) => {
-  database.all('SELECT * FROM budget')
+  database.all('SELECT * FROM jan_earnings')
     .then(rows => {
       response.send(rows)
     })
 })
-
 
 //Rebecca
 app.get('/todo', (request, response) => {
@@ -47,16 +47,26 @@ app.get('/todo', (request, response) => {
     })
 })
 
+app.delete('/todo/:id', (request, response) => {
+  database.run('DELETE FROM todoLists WHERE id=$id', {
+      $id: request.params.id
+    })
+    .then(() => {
+      console.log(request.params.id)
+      response.send()
+    })
+})
+
 app.post('/todo', (request, response) => {
   // console.log(request.body.name + 'POST')
-  database.run('INSERT INTO todoLists VALUES ($name)', {
-      $name: request.body.name
+  database.run('INSERT INTO todoLists VALUES ($name, $id)', {
+      $name: request.body.name,
+      $id: request.body.id
     })
     .then(() => {
       response.send()
     })
 })
-
 
 //Josefin
 app.get('/calendar', (request, response) => {
