@@ -18,7 +18,7 @@
     </form>
     <ul>
       <li v-for="item in lists" :key="item.id">
-        {{ typeof item === 'object' ? item.name :item }}
+        {{ item.name ? item.name :item }}
         <v-btn outlined icon small>+</v-btn>
         <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
       </li>
