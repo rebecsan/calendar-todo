@@ -17,6 +17,7 @@
       </v-btn>
     </form>
     <ul>
+
       <li v-for="item in lists" :key="item.id">
         <span @click="updateList(item.id)">{{ item.name ? item.name :item }}</span>
         <v-btn outlined icon small>+</v-btn>
@@ -29,13 +30,16 @@
 <script>
 export default {
   name: "Todo",
+
   created() {
       this.renderLists()
   },
+
   data() {
     return {
       // inputs: [],
       lists: [],
+
       listName: null,
       listNames: null
     }
@@ -49,8 +53,10 @@ export default {
         },
         method: 'POST'
       })
+      
       .then(() => {this.renderLists()});
       this.lists.push(this.listName)
+
       this.listName=''
     },
 

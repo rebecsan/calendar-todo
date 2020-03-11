@@ -5,7 +5,11 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-
+// app.use((request, response, next) => {
+//   response.header('Access-Control-Allow-Origin', '*')
+//   response.header('Access-Control-Allow-Headers', 'Content-Type')
+//   next()
+// })
 
 let database;
 
@@ -17,21 +21,23 @@ sqlite.open('database.sqlite').then(database_ => {
 app.post('/budget', (request, response) => {
   console.log(request.body);
   database.run(
-      'INSERT INTO budget VALUES ($activity, $amount)', {
-        $activity: request.body.activity,
-        $amount: request.body.amount
+      'INSERT INTO jan_earnings VALUES ($name, $sum, $id)', {
+        $name: request.body.name,
+        $sum: request.body.sum,
+        $id: request.body.id
       })
     .then(() => {
       response.send()
     })
 })
 
-app.get('/', (request, response) => {
-  database.all('SELECT * FROM budget').then(budget => {
-    console.log(budget)
-    response.send(budget)
-  })
+app.get('/budget', (request, response) => {
+  database.all('SELECT * FROM jan_earnings')
+    .then(rows => {
+      response.send(rows)
+    })
 })
+
 
 //Rebecca
 app.get('/todo', (request, response) => {
@@ -76,26 +82,36 @@ app.put('/todo/:id', (request, response) => {
 
 
 //Josefin
-app.get('/', (request, response) => {
+app.get('/calendar', (request, response) => {
   database.all('SELECT * FROM activities').then(activities => {
     console.log(activities)
     response.send(activities)
   })
 })
 
-app.post('/', (request, response) => {
-  database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?)',
+app.post('/calendar', (request, response) => {
+  database.run('INSERT INTO activities VALUES (?, ?, ?, ?, ?, ?)',
       [
         request.body.name,
         request.body.dateStart,
         request.body.dateEnd,
         request.body.timeStart,
-        request.body.timeEnd
+        request.body.timeEnd,
+        request.body.id
+
       ])
     .then(() => {
       response.send()
     })
 })
+
+app.delete('/calendar/:id', (request, response) => {
+  database.run('DELETE FROM activities WHERE id=?', [request.params.id]).then(() => {
+    console.log(request.params.id)
+    response.send()
+  })
+})
+
 
 app.listen(3000, () => {
   console.log("server started");
