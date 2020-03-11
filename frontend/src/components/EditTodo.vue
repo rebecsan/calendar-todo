@@ -18,6 +18,10 @@
       }
     },
 
+    inject: [
+      'renderLists'
+    ],
+
     methods: {
       editTodo(id) { 
         fetch('http://localhost:3000/todo/' + id, {
@@ -27,11 +31,9 @@
           },
           method: 'PUT'
         })
-        .then(response => response.json())
-        .then(result => {
-          console.log(name)
+        .then(response => {this.renderLists()
         })
-        .then(() => {this.renderLists()
+        .then(result => {
         })
         this.newName=''
       }

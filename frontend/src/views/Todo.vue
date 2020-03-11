@@ -21,7 +21,7 @@
         <span >{{ item.name ? item.name :item }}</span>
         <v-btn outlined icon small>+</v-btn>
         <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
-        <EditTodo :item="item" />
+        <EditTodo :item="item" ref="edit"/>
       </li>
     </ul>
   </div>
@@ -58,7 +58,6 @@ export default {
         },
         method: 'POST'
       })
-      
       .then(() => {this.renderLists()});
       this.lists.push(this.listName)
 
@@ -81,6 +80,12 @@ export default {
         })
     }
   },
+  
+  provide() {
+    return {
+      renderLists: this.renderLists
+    }
+  }
 };
 </script>
 
