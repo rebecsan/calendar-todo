@@ -17,19 +17,25 @@
       </v-btn>
     </form>
     <ul>
-
       <li v-for="item in lists" :key="item.id">
-        <span @click="updateList(item.id)">{{ item.name ? item.name :item }}</span>
+        <span >{{ item.name ? item.name :item }}</span>
         <v-btn outlined icon small>+</v-btn>
         <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
+        <EditTodo :item="item" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import EditTodo from '@/components/EditTodo.vue'
+
 export default {
   name: "Todo",
+
+  components: {
+    EditTodo
+  },
 
   created() {
       this.renderLists()
@@ -37,11 +43,10 @@ export default {
 
   data() {
     return {
-      // inputs: [],
       lists: [],
-
       listName: null,
       listNames: null
+      // newName: null
     }
   },
   methods: {
@@ -74,29 +79,12 @@ export default {
         .then(result => {
           this.lists = result
         })
-    },
-
-    updateList(id) { 
-      fetch('http://localhost:3000/todo/' + id, {
-        body: JSON.stringify({newName: this.newName}),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'PUT'
-      })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result)
-      })
-      .then(() => {this.renderLists()
-      })
-      this.newName=''
     }
-  }
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
   .new-list {
     width: 20vw;
     display: inline-block;

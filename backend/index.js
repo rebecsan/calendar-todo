@@ -75,7 +75,7 @@ app.put('/todo/:id', (request, response) => {
     $newName: request.body.name,
   })
   .then(() => {
-    console.log(request.params.id)
+    console.log(request.params.id + ' ' + request.body.name)
     response.send()
   })
 })
