@@ -1,37 +1,69 @@
 <template>
   <div id="app">
   <form>
-    <label for="name">New activity:</label>
+    <label for="name">Ny aktivitet:</label>
     <input type="text" v-model="addedActivityName" id="name" name="name">
-    <label for="dateStart">Date start:</label>
+    <label for="dateStart">Börjar:</label>
     <input type="date" v-model="addedDateStart" id="dateStart" name="dateStart">
-    <label for="dateEnd">Date end:</label>
+    <label for="dateEnd">Slutar:</label>
     <input type="date" v-model="addedDateEnd" id="dateEnd" name="dateEnd">
 
-    <label for="time">Select a starttime:</label>
+    <label for="time">Från klockan:</label>
     <input type="time" v-model="addedStartTime" id="startTime" name="startTime">
-    <label for="time">Select a endtime:</label>
+    <label for="time">Till och med:</label>
     <input type="time" v-model="addedEndTime" id="endTime" name="endTime">
-    <label for="category">Category:</label>
-
-      <select id="category">
-        <option value="addedWorkout">Workout</option>
-        <option value="addedWork">Work</option>
-        <option value="addedSchool">School</option>
-        <option value="addedVaycay">Vaycay</option>
-      </select>
-    <input type="submit" value="Lägg till i kalender" @click.prevent="onClick">
-    
+    <div id="textarea"> 
+      <v-textarea v-model="addedNote" solo name="input-7-4" label="Anteckning"></v-textarea>
+    </div> 
+    <v-btn 
+        class="add-new-activity" 
+        @click.prevent="onClick" 
+        outlined 
+        color="black">Lägg till aktivitet
+      </v-btn>
       
   </form>
-  <ul>
-    <li v-for="activity in activities" :key="activity.id">
-        {{ activity.name }}  {{ activity.dateStart }} {{ activity.timeStart }} - {{ activity.timeEnd }} 
-        <v-btn @click="removeData(activity.id)" outlined icon small>x</v-btn>
-    </li>
-  </ul>
 
+  <h1>Aktivitetskalender</h1>
   
+ 
+  <div class="flex-container">
+   
+ <v-card v-for="activity in activities" :key="activity.id"
+    class="mx-auto"
+    max-width="344"
+    outlined
+  
+  >
+  
+    <v-list-item three-line>
+     
+      <v-list-item-content id="flexItem">
+        
+        <v-list-item-subtitle>{{ activity.dateStart }} - {{ activity.dateEnd }}</v-list-item-subtitle>
+        <v-list-item-title class="headline mb-1">{{ activity.name }}</v-list-item-title>
+        <v-list-item-subtitle>Tid: {{ activity.timeStart }} - {{ activity.timeEnd }}</v-list-item-subtitle>
+        <v-list-item-subtitle id="flexItemNotes">Anteckning: {{ activity.note }}</v-list-item-subtitle>
+      </v-list-item-content>
+     
+     
+      <v-list-item-avatar
+        tile
+        size="80"
+        color="yellow"
+      ></v-list-item-avatar>
+    </v-list-item>
+    <div id="buttons">
+      <v-btn id="removeButton" @click="removeData(activity.id)" outlined icon small>x</v-btn>
+   
+      <v-checkbox
+          label="Genomförd"
+          
+        ></v-checkbox>
+      </div>
+  </v-card>
+   
+  </div>
 </div>
 
 </template>
@@ -48,6 +80,9 @@ export default {
       activities: null,
       addedStartTime: null,
       addedEndTime: null,
+      addedNote: null,
+      checked: true,
+     
       
     }
   },
@@ -56,6 +91,30 @@ export default {
       this.addData().then(() => {this.getData()})
       
     },
+
+ 
+   
+   
+//     editData(id) {
+//       console.log(id)
+//     fetch('http://localhost:3000/calendar/' + id, {
+//       body: JSON.stringify ({
+//           name: this.addedActivityName,
+//           dateStart: this.addedDateStart,
+//           dateEnd: this.addedDateEnd,
+//           timeStart: this.addedStartTime,
+//           timeEnd: this.addedEndTime
+//         }),
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       method: 'PUT'
+// })
+//   .then(response => response.json())
+//   .then(result => {
+//     console.log(result)
+//   })
+//     },
     addData() {
      return fetch("http://localhost:3000/calendar", {
         body: JSON.stringify ({
@@ -63,13 +122,15 @@ export default {
           dateStart: this.addedDateStart,
           dateEnd: this.addedDateEnd,
           timeStart: this.addedStartTime,
-          timeEnd: this.addedEndTime
+          timeEnd: this.addedEndTime,
+          note: this.addedNote,
         }),
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-      });
+        
+      })
     },
     
     removeData(id) {
@@ -89,15 +150,17 @@ export default {
   },
     
   created() {
+    this.getData();
     this.addData();
-  }
+  },
 
 };
 
 </script>
 
 <style>
-input [type=text], [type=date], [type=time], #name, #cars {
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Open+Sans&display=swap');
+input [type=text], [type=date], [type=time], #name {
   width: 30%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -117,4 +180,62 @@ input[type=submit] {
 form {
   margin:4em;
 }
+.flex-container {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  max-width: 80%;
+ 
+}
+.mx-auto {
+  margin: 15px;
+  font-family: 'Open Sans', sans-serif;
+  width: 60%;
+  
+}
+#button{
+  padding:1em;
+}
+h1 {
+  margin: auto;
+  text-align: center;
+  font-family: 'Bebas Neue'
+}
+#textarea {
+  width: 30%;
+}
+.v-input--selection-controls__input {
+  color: #E4B445 !important;
+  border-radius: 50% !important;
+  border: solid 0.1em; 
+  
+}
+
+.headline {
+  font-family: 'Bebas Neue';
+  font-size: 2em !important;
+}
+#flexItemNotes {
+  overflow: scroll;
+  font-size: 1em;
+  margin-top:2em;
+}
+.v-icon {
+  color: #E4B445 !important;
+  border-radius: 50% !important;
+  border: solid ; 
+  
+}
+#buttons {
+  margin-bottom: 0.1em;
+  margin-left:1em;
+  width: auto;
+}
+#removeButton {
+  position: absolute;
+  margin-left:23em;
+  z-index: 1;
+}
+
 </style>
