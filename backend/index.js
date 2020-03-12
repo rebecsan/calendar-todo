@@ -38,7 +38,6 @@ app.get('/budget', (request, response) => {
     })
 })
 
-
 //Rebecca
 app.get('/todo', (request, response) => {
   database.all('SELECT * FROM todoLists')
@@ -49,11 +48,11 @@ app.get('/todo', (request, response) => {
 
 app.delete('/todo/:id', (request, response) => {
   database.run('DELETE FROM todoLists WHERE id=$id', {
-    $id: request.params.id
-  })
-  .then(() => {
-    response.send()
-  })
+      $id: request.params.id
+    })
+    .then(() => {
+      response.send()
+    })
 })
 
 app.post('/todo', (request, response) => {

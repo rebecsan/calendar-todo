@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Här i Home.vue komponenten kan vi ha det innehåll som vi vill ska visas i router-viewen när man först laddar in sidan</p>
+    <img src="../assets/background.jpg" alt="background" class="homePage-img" />
   </div>
 </template>
 
