@@ -17,31 +17,36 @@
       </v-btn>
     </form>
     <ul>
-
       <li v-for="item in lists" :key="item.id">
-        {{ item.name ? item.name :item }}
+        <span >{{ item.name ? item.name :item }}</span>
         <v-btn outlined icon small>+</v-btn>
         <v-btn @click="deleteList(item.id)" outlined icon small>x</v-btn>
+        <EditTodo :item="item" ref="edit"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import EditTodo from '@/components/EditTodo.vue'
+
 export default {
   name: "Todo",
 
+  components: {
+    EditTodo
+  },
+
   created() {
-    this.renderLists()
+      this.renderLists()
   },
 
   data() {
     return {
-      // inputs: [],
       lists: [],
-
       listName: null,
       listNames: null
+      // newName: null
     }
   },
   methods: {
@@ -53,7 +58,6 @@ export default {
         },
         method: 'POST'
       })
-      
       .then(() => {this.renderLists()});
       this.lists.push(this.listName)
 
@@ -61,11 +65,9 @@ export default {
     },
 
     deleteList(id) {
-      fetch('http://localhost:3000/todo/' +id, {
+      fetch('http://localhost:3000/todo/' + id, {
         method: 'DELETE'
       }).then(response => {
-        console.log(Request)
-        console.log(response + 'Hej')
         this.renderLists()
       })
     },
@@ -75,17 +77,19 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.lists = result
-        //  for(let i = 0; i < result.length; i++) {
-        //    this.lists.push(result[i].name)
-        //  }
         })
-
+    }
+  },
+  
+  provide() {
+    return {
+      renderLists: this.renderLists
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
   .new-list {
     width: 20vw;
     display: inline-block;
