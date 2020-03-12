@@ -94,9 +94,9 @@ export default {
 
 <style scoped>
 #budget-container {
-  background-color: #a3dcd6;
-  width: 70%;
-  margin: 5rem auto;
+  background-color: #a1c2c7;
+  width: 90%;
+  margin: 2rem auto;
   padding-bottom: 2rem;
 }
 #router-links {
@@ -115,7 +115,7 @@ export default {
 }
 
 .router-link-active {
-  background-color: #a3dcd6;
+  background-color: #a1c2c7;
 }
 
 /* .test-form {

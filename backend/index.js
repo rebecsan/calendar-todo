@@ -38,7 +38,6 @@ app.get('/budget', (request, response) => {
     })
 })
 
-
 //Rebecca
 app.get('/todo', (request, response) => {
   database.all('SELECT * FROM todoLists')
@@ -50,11 +49,11 @@ app.get('/todo', (request, response) => {
 
 app.delete('/todo/:id', (request, response) => {
   database.run('DELETE FROM todoLists WHERE id=$id', {
-    $id: request.params.id
-  })
-  .then(() => {
-    response.send()
-  })
+      $id: request.params.id
+    })
+    .then(() => {
+      response.send()
+    })
 })
 
 app.post('/todo', (request, response) => {
@@ -71,13 +70,13 @@ app.post('/todo', (request, response) => {
 app.put('/todo/:id', (request, response) => {
   console.log('Fetch funkar')
   database.run('UPDATE todolists SET name=$newName WHERE id=$id', {
-    $id: request.params.id,
-    $newName: request.body.name,
-  })
-  .then(() => {
-    console.log(request.params.id + ' ' + request.body.name)
-    response.send()
-  })
+      $id: request.params.id,
+      $newName: request.body.name,
+    })
+    .then(() => {
+      console.log(request.params.id + ' ' + request.body.name)
+      response.send()
+    })
 })
 
 
