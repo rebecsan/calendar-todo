@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Header -->
+    <!-- Header: Inkomster -->
     <header class="budget-section-header">
       <p class="display-hide" @click="newInput" v-if="!display">+</p>
       <p class="display-hide" @click="close" v-if="display">-</p>
@@ -8,12 +8,13 @@
       <p class="amount">{{}} kr</p>
     </header>
 
-    <!-- Display / Hide -->
+    <!-- Display: Inkomster -->
     <div v-if="display" class="show-hide">
       <div class="budget-items" v-for="item in budget" :key="item.id">
         <p>{{item.name}}</p>
         <p>{{item.sum}}</p>
       </div>
+
       <!-- Input -->
       <div class="inputs">
         <div class="input-option">
@@ -34,8 +35,15 @@
             <option value="Övriga skattefria inkomster">Övriga skattefria inkomster</option>
           </datalist>
         </div>
-        <input class="input-amount" type="text" placeholder="summa (kr)" v-model="sum" required />
-        <input type="button" value="Lägg till" @click="onClick" />
+        <input
+          class="input-amount"
+          type="text"
+          placeholder="summa (kr)"
+          v-model="sum"
+          @keydown.enter.prevent="postAndRender"
+          required
+        />
+        <input type="button" value="Lägg till" @click.prevent="postAndRender" />
       </div>
     </div>
   </div>
@@ -62,7 +70,7 @@ export default {
     close() {
       this.display = false;
     },
-    onClick() {
+    postAndRender() {
       this.postData();
     },
     postData() {
@@ -73,6 +81,7 @@ export default {
           "Content-Type": "application/json"
         }
       });
+      this.renderLists();
     },
     renderLists() {
       fetch("http://localhost:3000/budget")

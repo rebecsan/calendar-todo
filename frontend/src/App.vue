@@ -281,6 +281,7 @@ video {
 
 /* Header */
 .main-header {
+  text-align: left;
   width: 100%;
   height: 6rem;
   border-bottom: 2px solid #507f85;
