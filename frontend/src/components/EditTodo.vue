@@ -14,7 +14,7 @@
   export default {
     data() {
       return {
-        newName: null
+        newName: this.item.name
       }
     },
 
@@ -35,7 +35,6 @@
         })
         .then(result => {
         })
-        this.newName=''
       }
     },
 
