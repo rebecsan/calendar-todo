@@ -19,7 +19,8 @@
     },
 
     inject: [
-      'renderLists'
+      'renderLists',
+      'showEdit'
     ],
 
     methods: {
@@ -31,7 +32,9 @@
           },
           method: 'PUT'
         })
-        .then(response => {this.renderLists()
+        .then(response => {
+          this.renderLists()
+          this.showEdit()
         })
         .then(result => {
         })

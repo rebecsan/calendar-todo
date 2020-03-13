@@ -1,7 +1,7 @@
 <template>
   <main>
     <img src="@/assets/pussel6.svg"/>
-    <h1>Att-göra listor</h1>
+    <h1>Att göra</h1>
     <form>
       <label for="new-list">Ny lista</label>
       <v-text-field
@@ -104,8 +104,8 @@ export default {
   #lists {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 5rem;
+    width: 60%;
   }
   img {
     position: absolute;
@@ -123,13 +123,11 @@ export default {
     font-family: "Bebas Neue";
     font-size: 1.2em;
   }
-  v-btn {
-    display: inline;
-  }
   .add-new-list{
     font-family: "Bebas Neue";
     font-size: 1em;
-    margin-bottom:3em;
+    margin-bottom: 5rem;
+    margin-top: 1rem;
   }
 
 </style>
