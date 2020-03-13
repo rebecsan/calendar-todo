@@ -4,12 +4,11 @@
       <h1>Aktivitetskalender</h1>
     </div>
     <div id="imgDiv">
-    <img src="@/assets/pussel6.svg"/>
+      <img src="@/assets/pussel6.svg" />
     </div>
     <form>
       <label for="name">Ny aktivitet:</label>
-      <v-text-field class="new-activity" v-model="addedActivityName" dense clearable>
-      </v-text-field>
+      <v-text-field class="new-activity" v-model="addedActivityName" dense clearable></v-text-field>
       <label for="dateStart">Börjar:</label>
       <input type="date" v-model="addedDateStart" id="dateStart" name="dateStart" />
       <label for="dateEnd">Slutar:</label>
@@ -21,27 +20,29 @@
       <div id="textarea">
         <v-textarea v-model="addedNote" solo name="input-7-4" label="Anteckning"></v-textarea>
       </div>
-      <v-btn class="add-new-activity" @click.prevent="onClick" outlined color="black">Lägg till aktivitet</v-btn>
+      <v-btn
+        class="add-new-activity"
+        @click.prevent="onClick"
+        outlined
+        color="black"
+      >Lägg till aktivitet</v-btn>
     </form>
-    
+
     <div id="secondHeader">
       <h2>Din kalender</h2>
     </div>
     <div id="grid-container">
-      <div v-for="activity in activities" :key="activity.id" class="grid-item" >
-        
+      <div v-for="activity in activities" :key="activity.id" class="grid-item">
         <p id="pDate">{{ activity.dateStart }} - {{ activity.dateEnd }}</p>
-    
+
         <h3 id="headerInGrid">{{ activity.name }}</h3>
-    
+
         <p id="pTime">Tid: {{ activity.timeStart }} - {{ activity.timeEnd }}</p>
-  
+
         <p id="pNote">Anteckning: {{ activity.note }}</p>
         <div id="buttons">
           <v-checkbox label="Genomförd"></v-checkbox>
-          <v-btn id="removeButton" @click="removeData(activity.id)" outlined icon small>x</v-btn>
-          Ta bort
-          
+          <v-btn id="removeButton" @click="removeData(activity.id)" outlined icon small>x</v-btn>Ta bort
         </div>
       </div>
     </div>
@@ -49,9 +50,7 @@
 </template>
 
 <script>
-
 export default {
-  
   name: "Calendar",
   data() {
     return {
@@ -62,8 +61,7 @@ export default {
       addedStartTime: null,
       addedEndTime: null,
       addedNote: null,
-      checked: true,
-      
+      checked: true
     };
   },
   methods: {
@@ -116,7 +114,7 @@ export default {
 }
 h1 {
   font-family: "Bebas Neue";
-  margin-top:1em;
+  margin-top: 1em;
   margin-left: 2.2em;
 }
 
@@ -124,9 +122,7 @@ img {
   position: absolute;
   height: 950px;
   opacity: 0.5;
-  left:60em;
-
-  
+  left: 60em;
 }
 
 /* FORM
@@ -137,7 +133,7 @@ input [type="text"],
   margin: 1em 0;
   display: block;
   width: 100%;
-  border-bottom:1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   font-family: "Open Sans", sans-serif;
 }
 input[type="submit"] {
@@ -148,8 +144,8 @@ input[type="submit"] {
   cursor: pointer;
 }
 form {
-  margin-top:8em;
-  margin-left:6.4em;
+  margin-top: 8em;
+  margin-left: 6.4em;
   width: 30%;
 }
 label {
@@ -157,28 +153,28 @@ label {
   font-size: 1.2em;
 }
 #textarea {
-  margin-top:2em;
+  margin-top: 2em;
 }
-.add-new-activity{
+.add-new-activity {
   font-family: "Bebas Neue";
   font-size: 1em;
-  margin-bottom:3em;
+  margin-bottom: 3em;
 }
 /* RENDER INPUT
 ------------------------ */
 
 #grid-container {
   display: grid;
-  grid-template-columns: auto auto ;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns: auto auto;
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 10em;
-  margin-bottom:10em;
+  margin-bottom: 10em;
   grid-column-gap: 50px;
-	grid-gap:4rem;
-  width:100%;
+  grid-gap: 4rem;
+  width: 100%;
 }
 .grid-item {
-  margin-left:7em;
+  margin-left: 7em;
   border-right: 2px solid #e4b445;
   height: 38vw;
 }
@@ -186,33 +182,32 @@ label {
   font-family: "Bebas Neue";
   text-transform: uppercase;
   font-size: 3em;
-  padding-top:0.5em;
+  padding-top: 0.5em;
 }
 #pDate {
   font-family: "Open Sans", sans-serif;
-  font-size:0.7em;
+  font-size: 0.7em;
 }
 
 #pTime {
   font-family: "Open Sans", sans-serif;
-  top:140em;
-  font-size:0.7em;
-  padding-top:9em;
+  top: 140em;
+  font-size: 0.7em;
+  padding-top: 9em;
 }
 #pNote {
   font-family: "Open Sans", sans-serif;
-  top:100em; 
-  padding-top:1em;
-  padding-bottom:5em;
+  top: 100em;
+  padding-top: 1em;
+  padding-bottom: 5em;
 }
 
 #secondHeader {
   font-family: "Bebas Neue";
   text-transform: uppercase;
   font-size: 0.9em;
-  margin-top:10em;
-  margin-left:7.5em;
-  
+  margin-top: 10em;
+  margin-left: 7.5em;
 }
 .mx-auto {
   margin: 15px;
@@ -233,7 +228,6 @@ label {
 }
 
 #headerCalendar {
-  margin:2em;
- 
+  margin: 4em 2em 2em 2em;
 }
 </style>

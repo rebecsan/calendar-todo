@@ -31,15 +31,15 @@ export default {
 .budget-header {
   font-family: "Bebas Neue", cursive;
   font-size: 2.2em;
-  width: 90%;
-  margin: 2rem auto;
+  width: 80%;
+  margin: 4rem auto 2rem;
   letter-spacing: 1px;
 }
 
 #budget-container {
   background-color: #afcbcf;
-  width: 90%;
-  margin: 2rem auto 5rem;
+  width: 80%;
+  margin: 4rem auto 5rem;
   padding-bottom: 1rem;
 }
 #router-links {

@@ -248,7 +248,7 @@ video {
   height: auto;
   background-color: #507f85;
   display: inline-block;
-  padding: 6rem 2rem 18rem;
+  padding: 6rem 2rem 22rem;
   position: relative;
 }
 .main-router-link {
@@ -265,7 +265,7 @@ video {
   height: auto;
   background-color: #507f85;
   display: inline-block;
-  padding: 6rem 1rem 18rem;
+  padding: 6rem 1rem 22rem;
   position: relative;
 }
 
