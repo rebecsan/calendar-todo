@@ -151,7 +151,7 @@ html {
 }
 
 /* Fonts */
-@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Open+Sans:300,400,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Open+Sans:300,400,600,700&display=swap");
 
 /* 
 font-family: 'Bebas Neue', cursive;
@@ -160,7 +160,7 @@ font-family: 'Open Sans', sans-serif;
 
 html {
   font-family: "Open Sans", sans-serif;
-  color: black;
+  color: #333333;
 }
 
 /* Reset margins and paddings on most elements  */

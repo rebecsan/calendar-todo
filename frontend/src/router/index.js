@@ -34,7 +34,7 @@ const routes = [{
   name: 'Kalender',
   component: Calendar
 }, {
-  path: '/budget/',
+  path: '/budget',
   name: 'Budget',
   component: Budget,
   children: [{

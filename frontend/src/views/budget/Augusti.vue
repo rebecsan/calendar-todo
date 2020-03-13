@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <p>Ingen data för Augusti ännu</p>
+  </div>
 </template>
 
 <script>

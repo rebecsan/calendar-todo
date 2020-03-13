@@ -21,7 +21,7 @@ sqlite.open('database.sqlite').then(database_ => {
 app.post('/budget', (request, response) => {
   console.log(request.body);
   database.run(
-      'INSERT INTO jan_earnings VALUES ($name, $sum, $id)', {
+      'INSERT INTO incomings VALUES ($name, $sum, $id)', {
         $name: request.body.name,
         $sum: request.body.sum,
         $id: request.body.id
@@ -32,9 +32,18 @@ app.post('/budget', (request, response) => {
 })
 
 app.get('/budget', (request, response) => {
-  database.all('SELECT * FROM jan_earnings')
+  database.all('SELECT * FROM incomings')
     .then(rows => {
       response.send(rows)
+    })
+})
+
+app.delete('/budget/:id', (request, response) => {
+  database.run('DELETE FROM incomings WHERE id=$id', {
+      $id: request.params.id
+    })
+    .then(() => {
+      response.send()
     })
 })
 
