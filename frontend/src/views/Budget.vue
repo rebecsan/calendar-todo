@@ -33,21 +33,19 @@ export default {
   font-size: 2.2em;
   width: 90%;
   margin: 2rem auto;
-  text-decoration: underline;
-  text-decoration-color: #e4b445;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 #budget-container {
-  background-color: #a1c2c7;
+  background-color: #afcbcf;
   width: 90%;
-  margin: 2rem auto;
-  padding-bottom: 2rem;
+  margin: 2rem auto 5rem;
+  padding-bottom: 1rem;
 }
 #router-links {
   display: flex;
   justify-content: space-between;
-  margin: 1rem auto;
+  margin: 3rem auto;
 }
 
 .router-link {
@@ -60,6 +58,6 @@ export default {
 }
 
 .router-link-active {
-  background-color: #a1c2c7;
+  background-color: #afcbcf;
 }
 </style>

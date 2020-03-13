@@ -18,7 +18,9 @@ sqlite.open('database.sqlite').then(database_ => {
 })
 
 //Diana
-app.post('/budget', (request, response) => {
+
+//Income
+app.post('/income', (request, response) => {
   console.log(request.body);
   database.run(
       'INSERT INTO incomings VALUES ($name, $sum, $id)', {
@@ -31,15 +33,45 @@ app.post('/budget', (request, response) => {
     })
 })
 
-app.get('/budget', (request, response) => {
+app.get('/income', (request, response) => {
   database.all('SELECT * FROM incomings')
     .then(rows => {
       response.send(rows)
     })
 })
 
-app.delete('/budget/:id', (request, response) => {
+app.delete('/income/:id', (request, response) => {
   database.run('DELETE FROM incomings WHERE id=$id', {
+      $id: request.params.id
+    })
+    .then(() => {
+      response.send()
+    })
+})
+
+// Living
+app.post('/living', (request, response) => {
+  console.log(request.body);
+  database.run(
+      'INSERT INTO living VALUES ($name, $sum, $id)', {
+        $name: request.body.name,
+        $sum: request.body.sum,
+        $id: request.body.id
+      })
+    .then(() => {
+      response.send()
+    })
+})
+
+app.get('/living', (request, response) => {
+  database.all('SELECT * FROM living')
+    .then(rows => {
+      response.send(rows)
+    })
+})
+
+app.delete('/living/:id', (request, response) => {
+  database.run('DELETE FROM living WHERE id=$id', {
       $id: request.params.id
     })
     .then(() => {
@@ -76,12 +108,12 @@ app.post('/todo', (request, response) => {
 
 app.put('/todo/:id', (request, response) => {
   database.run('UPDATE todolists SET name=$newName WHERE id=$id', {
-    $id: request.params.id,
-    $newName: request.body.name,
-  })
-  .then(() => {
-    response.send()
-  })
+      $id: request.params.id,
+      $newName: request.body.name,
+    })
+    .then(() => {
+      response.send()
+    })
 })
 
 

@@ -1,79 +1,85 @@
 <template>
   <div id="app">
     <!-- Small Sidebar -->
-    <div class="small-sidebar" v-if="smallSidebar">
-      <nav>
-        <img
-          src="./assets/larger-symbol.png"
-          alt="large sidebar"
-          class="larger-symbol"
-          @click="displayLarger"
-        />
-        <router-link class="main-router-link" :to="{name: 'Home'}" @click.native="navHome" exact>
-          <img v-if="!homeActive" :src="homeSymbol" alt="home" class="symbols" />
-          <img v-if="homeActive" :src="homeSymbolActive" alt="home" class="symbols" />
-        </router-link>
-        <router-link class="main-router-link" to="/Todo" @click.native="navTodo">
-          <img v-if="!todoActive" :src="todoSymbol" alt="todo" class="symbols" />
-          <img v-if="todoActive" :src="todoSymbolActive" alt="todo" class="symbols" />
-        </router-link>
-        <router-link class="main-router-link" to="/Calendar" @click.native="navCalendar">
-          <img v-if="!calendarActive" :src="calendarSymbol" alt="calendar" class="symbols" />
-          <img v-if="calendarActive" :src="calendarSymbolActive" alt="calendar" class="symbols" />
-        </router-link>
-        <router-link class="main-router-link" to="/Budget/Januari" @click.native="navBudget">
-          <img v-if="!budgetActive" :src="budgetSymbol" alt="budget" class="symbols" />
-          <img v-if="budgetActive" :src="budgetSymbolActive" alt="budget" class="symbols" />
-        </router-link>
-      </nav>
-    </div>
-
-    <!-- Large Sidebar -->
-    <div class="large-sidebar" v-else>
-      <nav>
-        <img
-          src="./assets/smaller-symbol.png"
-          alt="small sidebar"
-          class="smaller-symbol"
-          @click="displaySmaller"
-        />
-        <router-link class="main-router-link" :to="{name: 'Home'}" @click.native="navHome" exact>
-          <img v-if="!homeActive" :src="homeSymbol" alt="home" class="symbols" />
-          <img v-if="homeActive" :src="homeSymbolActive" alt="home" class="symbols" /> Hem
-        </router-link>
-        <router-link class="main-router-link" to="/Todo" @click.native="navTodo">
-          <img v-if="!todoActive" :src="todoSymbol" alt="todo" class="symbols" />
-          <img v-if="todoActive" :src="todoSymbolActive" alt="todo" class="symbols" /> Todo
-        </router-link>
-        <router-link class="main-router-link" to="/Calendar" @click.native="navCalendar">
-          <img v-if="!calendarActive" :src="calendarSymbol" alt="calendar" class="symbols" />
-          <img v-if="calendarActive" :src="calendarSymbolActive" alt="calendar" class="symbols" />Kalender
-        </router-link>
-        <router-link class="main-router-link" to="/Budget/Januari" @click.native="navBudget">
-          <img v-if="!budgetActive" :src="budgetSymbol" alt="budget" class="symbols" />
-          <img v-if="budgetActive" :src="budgetSymbolActive" alt="budget" class="symbols" />Budget
-        </router-link>
-      </nav>
-    </div>
-
-    <div class="main-page">
-      <!-- Header -->
-      <header class="main-header">
-        <h1>
-          <router-link class="home-router-link" :to="{name: 'Home'}" @click.native="navHome" exact>
-            <img src="./assets/logo.png" alt="logo" class="logo" />Hjälpredan
+    <div class="displayFlex">
+      <div class="small-sidebar" v-if="smallSidebar">
+        <nav>
+          <img
+            src="./assets/larger-symbol.png"
+            alt="large sidebar"
+            class="larger-symbol"
+            @click="displayLarger"
+          />
+          <router-link class="main-router-link" :to="{name: 'Home'}" @click.native="navHome" exact>
+            <img v-if="!homeActive" :src="homeSymbol" alt="home" class="symbols" />
+            <img v-if="homeActive" :src="homeSymbolActive" alt="home" class="symbols" />
           </router-link>
-        </h1>
-      </header>
+          <router-link class="main-router-link" to="/Todo" @click.native="navTodo">
+            <img v-if="!todoActive" :src="todoSymbol" alt="todo" class="symbols" />
+            <img v-if="todoActive" :src="todoSymbolActive" alt="todo" class="symbols" />
+          </router-link>
+          <router-link class="main-router-link" to="/Calendar" @click.native="navCalendar">
+            <img v-if="!calendarActive" :src="calendarSymbol" alt="calendar" class="symbols" />
+            <img v-if="calendarActive" :src="calendarSymbolActive" alt="calendar" class="symbols" />
+          </router-link>
+          <router-link class="main-router-link" to="/Budget/Januari" @click.native="navBudget">
+            <img v-if="!budgetActive" :src="budgetSymbol" alt="budget" class="symbols" />
+            <img v-if="budgetActive" :src="budgetSymbolActive" alt="budget" class="symbols" />
+          </router-link>
+        </nav>
+      </div>
 
-      <!-- Router-view -->
-      <router-view class="page"></router-view>
+      <!-- Large Sidebar -->
+      <div class="large-sidebar" v-else>
+        <nav>
+          <img
+            src="./assets/smaller-symbol.png"
+            alt="small sidebar"
+            class="smaller-symbol"
+            @click="displaySmaller"
+          />
+          <router-link class="main-router-link" :to="{name: 'Home'}" @click.native="navHome" exact>
+            <img v-if="!homeActive" :src="homeSymbol" alt="home" class="symbols" />
+            <img v-if="homeActive" :src="homeSymbolActive" alt="home" class="symbols" /> Hem
+          </router-link>
+          <router-link class="main-router-link" to="/Todo" @click.native="navTodo">
+            <img v-if="!todoActive" :src="todoSymbol" alt="todo" class="symbols" />
+            <img v-if="todoActive" :src="todoSymbolActive" alt="todo" class="symbols" /> Todo
+          </router-link>
+          <router-link class="main-router-link" to="/Calendar" @click.native="navCalendar">
+            <img v-if="!calendarActive" :src="calendarSymbol" alt="calendar" class="symbols" />
+            <img v-if="calendarActive" :src="calendarSymbolActive" alt="calendar" class="symbols" />Kalender
+          </router-link>
+          <router-link class="main-router-link" to="/Budget/Januari" @click.native="navBudget">
+            <img v-if="!budgetActive" :src="budgetSymbol" alt="budget" class="symbols" />
+            <img v-if="budgetActive" :src="budgetSymbolActive" alt="budget" class="symbols" />Budget
+          </router-link>
+        </nav>
+      </div>
 
-      <!-- Footer -->
-      <footer class="main-footer">
-        <p class="copyright">Copyright &#9400; Hjälpredan</p>
-      </footer>
+      <div class="main-page">
+        <!-- Header -->
+        <header class="main-header">
+          <h1>
+            <router-link
+              class="home-router-link"
+              :to="{name: 'Home'}"
+              @click.native="navHome"
+              exact
+            >
+              <img src="./assets/logo.png" alt="logo" class="logo" />Hjälpredan
+            </router-link>
+          </h1>
+        </header>
+
+        <!-- Router-view -->
+        <router-view class="page"></router-view>
+      </div>
     </div>
+    <!-- Footer -->
+    <footer class="main-footer">
+      <p class="copyright">Copyright &#9400; Hjälpredan</p>
+    </footer>
   </div>
 </template>
 
@@ -90,6 +96,7 @@ export default {
       calendarSymbolActive: require("./assets/calendar-yellow.png"),
       budgetSymbol: require("./assets/budget.png"),
       budgetSymbolActive: require("./assets/budget-yellow.png"),
+
       //Booleans
       smallSidebar: true,
       homeActive: true,
@@ -227,7 +234,7 @@ video {
 /* MAIN PAGE
 -------------------------------------*/
 
-#app {
+.displayFlex {
   display: flex;
 }
 
@@ -241,7 +248,7 @@ video {
   height: auto;
   background-color: #507f85;
   display: inline-block;
-  padding: 6rem 2rem 3rem;
+  padding: 6rem 2rem 18rem;
   position: relative;
 }
 .main-router-link {
@@ -258,7 +265,7 @@ video {
   height: auto;
   background-color: #507f85;
   display: inline-block;
-  padding: 6rem 1rem 3rem;
+  padding: 6rem 1rem 18rem;
   position: relative;
 }
 
