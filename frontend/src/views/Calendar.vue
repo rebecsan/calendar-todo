@@ -1,10 +1,11 @@
 <template>
-  <div id="app">
+  <div id="calendarApp">
     <div id="headerCalendar">
       <h1>Aktivitetskalender</h1>
     </div>
+    <div id="imgDiv">
     <img src="@/assets/pussel6.svg"/>
-    
+    </div>
     <form>
       <label for="name">Ny aktivitet:</label>
       <v-text-field class="new-activity" v-model="addedActivityName" dense clearable>
@@ -37,8 +38,10 @@
   
         <p id="pNote">Anteckning: {{ activity.note }}</p>
         <div id="buttons">
-          <v-btn id="removeButton" @click="removeData(activity.id)" outlined icon small>x</v-btn>
           <v-checkbox label="Genomförd"></v-checkbox>
+          <v-btn id="removeButton" @click="removeData(activity.id)" outlined icon small>x</v-btn>
+          Ta bort
+          
         </div>
       </div>
     </div>
@@ -108,7 +111,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Open+Sans&display=swap");
-#app {
+#calendarApp {
   position: relative;
 }
 h1 {
@@ -116,12 +119,13 @@ h1 {
   margin-top:1em;
   margin-left: 2.2em;
 }
+
 img {
   position: absolute;
   height: 950px;
   opacity: 0.5;
-  margin-left: 68em;
-  margin-top:2em;
+  left:60em;
+
   
 }
 
@@ -144,9 +148,8 @@ input[type="submit"] {
   cursor: pointer;
 }
 form {
-  margin-top:12em;
-  position: relative;
-  margin-left:-15.6em;
+  margin-top:8em;
+  margin-left:6.4em;
   width: 30%;
 }
 label {
@@ -163,59 +166,52 @@ label {
 }
 /* RENDER INPUT
 ------------------------ */
+
 #grid-container {
   display: grid;
   grid-template-columns: auto auto ;
   grid-template-columns:repeat(2, 1fr);
-  margin-left:-30.3em;
-  margin-top: 75em;
+  margin-top: 10em;
   margin-bottom:10em;
   grid-column-gap: 50px;
-  position: relative;
 	grid-gap:4rem;
   width:100%;
 }
 .grid-item {
-  padding:5em;
+  margin-left:7em;
   border-right: 2px solid #e4b445;
   height: 38vw;
+}
+#headerInGrid {
+  font-family: "Bebas Neue";
+  text-transform: uppercase;
+  font-size: 3em;
+  padding-top:0.5em;
 }
 #pDate {
   font-family: "Open Sans", sans-serif;
   font-size:0.7em;
-  position: absolute;
-  margin-top: -5em;
-}
-#headerInGrid {
-  position: absolute;
-  font-family: "Bebas Neue";
-  text-transform: uppercase;
-  font-size: 3em;
-  margin-top:-0.4em;
-}
-#pTime {
-  position: absolute;
-  font-family: "Open Sans", sans-serif;
-  margin-top:12em;
-  font-size:0.7em;
-}
-#pNote {
-  position: relative;
-  font-family: "Open Sans", sans-serif;
-  margin-top:11em
 }
 
-#buttons {
-  margin-top:12em;
+#pTime {
+  font-family: "Open Sans", sans-serif;
+  top:140em;
+  font-size:0.7em;
+  padding-top:9em;
+}
+#pNote {
+  font-family: "Open Sans", sans-serif;
+  top:100em; 
+  padding-top:1em;
+  padding-bottom:5em;
 }
 
 #secondHeader {
-  position: absolute;
   font-family: "Bebas Neue";
   text-transform: uppercase;
   font-size: 0.9em;
-  margin-top:75em;
-  margin-left:7.7em;
+  margin-top:10em;
+  margin-left:7.5em;
   
 }
 .mx-auto {
@@ -226,14 +222,6 @@ label {
 #button {
   padding: 1em;
 }
-
-.v-input--selection-controls__input {
-  color: #e4b445 !important;
-  border-radius: 50% !important;
-  border: solid 0.1em;
-  margin-right: -0.5em; 
-}
-
 .headline {
   font-family: "Bebas Neue";
   font-size: 2em !important;
@@ -243,17 +231,7 @@ label {
   font-size: 1em;
   margin-top: 2em;
 }
-.v-icon {
-  color: #e4b445 !important;
-  border-radius: 50% !important;
-  border: solid;
- 
-}
-#removeButton {
-  position: absolute;
-  margin-left: 23em;
-  z-index: 1;
-}
+
 #headerCalendar {
   margin:2em;
  
