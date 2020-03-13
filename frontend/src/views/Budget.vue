@@ -1,5 +1,6 @@
 <template>
   <div id="budget">
+    <h2 class="budget-header">Budget</h2>
     <div id="budget-container">
       <nav id="router-links">
         <router-link class="router-link" to="/Budget/Januari" exact>Jan</router-link>
@@ -15,94 +16,36 @@
         <router-link class="router-link" to="/Budget/November" exact>Nov</router-link>
         <router-link class="router-link" to="/Budget/December" exact>Dec</router-link>
       </nav>
-
       <router-view></router-view>
     </div>
-
-    <!-- <form class="test-form">
-      <input type="text" v-model="addedActivity" />
-      <input type="text" v-model="addedAmount" />
-      <input type="submit" @click.prevent="onClick" />
-    </form>
-    <ul>
-      <li
-        @click.prevent="deleteItem"
-        v-for="budgetItem in budget"
-        :key="budgetItem.id"
-      >{{budgetItem.activity}}: {{budgetItem.amount}}</li>
-    </ul>-->
   </div>
 </template>
 
 <script>
 export default {
   name: "Budget"
-  // created() {
-  //   this.renderBudgetList();
-  // },
-  // data() {
-  //   return {
-  //     addedActivity: null,
-  //     addedAmount: null,
-  //     budget: null
-  //   };
-  // },
-  // methods: {
-  //   deleteItem() {
-  //     fetch("http://localhost:3000/budget", {
-  //       body:
-  //         '{"activity": "' +
-  //         this.addedActivity +
-  //         '"' +
-  //         ', "amount": "' +
-  //         this.addedAmount +
-  //         '"}',
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       }
-  //     });
-  //   },
-  //   onClick() {
-  //     this.postData();
-  //   },
-  //   postData() {
-  //     fetch("http://localhost:3000/budget", {
-  //       body:
-  //         '{"activity": "' +
-  //         this.addedActivity +
-  //         '"' +
-  //         ', "amount": "' +
-  //         this.addedAmount +
-  //         '"}',
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       }
-  //     });
-  //   },
-  //   renderBudgetList() {
-  //     fetch("http://localhost:3000/budget")
-  //       .then(response => response.json())
-  //       .then(result => {
-  //         this.budget = result;
-  //       });
-  //   }
-  // }
 };
 </script>
 
 <style scoped>
+.budget-header {
+  font-family: "Bebas Neue", cursive;
+  font-size: 2.2em;
+  width: 80%;
+  margin: 4rem auto 2rem;
+  letter-spacing: 1px;
+}
+
 #budget-container {
-  background-color: #a1c2c7;
-  width: 90%;
-  margin: 2rem auto;
-  padding-bottom: 2rem;
+  background-color: #afcbcf;
+  width: 80%;
+  margin: 4rem auto 5rem;
+  padding-bottom: 1rem;
 }
 #router-links {
   display: flex;
   justify-content: space-between;
-  margin: 1rem auto;
+  margin: 3rem auto;
 }
 
 .router-link {
@@ -115,17 +58,6 @@ export default {
 }
 
 .router-link-active {
-  background-color: #a1c2c7;
+  background-color: #afcbcf;
 }
-
-/* .test-form {
-  padding: 1rem;
-}
-
-.test-form input {
-  border: 0.5px solid grey;
-  border-radius: 2px;
-  margin: 0.2rem;
-  padding: 0.2rem;
-} */
 </style>

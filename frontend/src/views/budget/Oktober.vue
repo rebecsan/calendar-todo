@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <p>Ingen data för Oktober ännu</p>
+  </div>
 </template>
 
 <script>

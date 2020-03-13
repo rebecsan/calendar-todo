@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <p>Ingen data för Juli ännu</p>
+  </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>April</p>
+    <p>Ingen data för April ännu</p>
   </div>
 </template>
 

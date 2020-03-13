@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>Ingen data för December ännu</div>
 </template>
 
 <script>
