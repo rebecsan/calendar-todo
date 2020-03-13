@@ -14,12 +14,13 @@
   export default {
     data() {
       return {
-        newName: null
+        newName: this.item.name
       }
     },
 
     inject: [
-      'renderLists'
+      'renderLists',
+      'showEdit'
     ],
 
     methods: {
@@ -31,11 +32,12 @@
           },
           method: 'PUT'
         })
-        .then(response => {this.renderLists()
+        .then(response => {
+          this.renderLists()
+          this.showEdit()
         })
         .then(result => {
         })
-        this.newName=''
       }
     },
 
@@ -44,7 +46,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
