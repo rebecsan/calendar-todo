@@ -129,9 +129,7 @@ img {
 ---------------- */
 input [type="text"],
 [type="date"],
-[type="time"],
-#name {
-  padding: 1em;
+[type="time"] {
   margin: 1em 0;
   display: block;
   width: 100%;
