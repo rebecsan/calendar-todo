@@ -131,6 +131,7 @@
     </div>
   </div>
 </template>
+-->
 
 <script>
 export default {
@@ -153,6 +154,7 @@ export default {
       livingSum: null,
       livingClosed: true,
       totalLiving: null,
+      test: "living",
 
       totalSum: null,
       initialValue: 0
@@ -175,13 +177,10 @@ export default {
     },
     postIncomeData() {
       fetch("http://localhost:3000/income", {
-        body:
-          '{"name": "' +
-          this.incomeName +
-          '"' +
-          ', "sum": "' +
-          this.incomeSum +
-          '"}',
+        body: JSON.stringify({
+          name: this.incomeName,
+          sum: this.incomeSum
+        }),
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -222,13 +221,11 @@ export default {
 
     postLivingData() {
       fetch("http://localhost:3000/living", {
-        body:
-          '{"name": "' +
-          this.livingName +
-          '"' +
-          ', "sum": "' +
-          this.livingSum +
-          '"}',
+        body: JSON.stringify({
+          test: this.test,
+          name: this.livingName,
+          sum: this.livingSum
+        }),
         method: "POST",
         headers: {
           "Content-Type": "application/json"

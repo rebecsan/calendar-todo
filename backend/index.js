@@ -5,11 +5,6 @@ const app = express()
 
 app.use(express.json())
 app.use(cors())
-// app.use((request, response, next) => {
-//   response.header('Access-Control-Allow-Origin', '*')
-//   response.header('Access-Control-Allow-Headers', 'Content-Type')
-//   next()
-// })
 
 let database;
 
@@ -22,16 +17,21 @@ sqlite.open('database.sqlite').then(database_ => {
 //Income
 app.post('/income', (request, response) => {
   console.log(request.body);
-  database.run(
-      'INSERT INTO incomings VALUES ($name, $sum, $id)', {
-        $name: request.body.name,
-        $sum: request.body.sum,
-        $id: request.body.id
+  if (request.body.name && request.body.sum) {
+    database.run(
+        'INSERT INTO living VALUES ($name, $sum, $id)', {
+          $name: request.body.name,
+          $sum: request.body.sum,
+          $id: request.body.id
+        })
+      .then(() => {
+        response.status(201).send()
       })
-    .then(() => {
-      response.send()
-    })
+  } else {
+    response.status(400).send()
+  }
 })
+
 
 app.get('/income', (request, response) => {
   database.all('SELECT * FROM incomings')
@@ -51,16 +51,20 @@ app.delete('/income/:id', (request, response) => {
 
 // Living
 app.post('/living', (request, response) => {
-  console.log(request.body);
-  database.run(
-      'INSERT INTO living VALUES ($name, $sum, $id)', {
-        $name: request.body.name,
-        $sum: request.body.sum,
-        $id: request.body.id
+  if (request.body.name && request.body.sum) {
+    database.run(
+        'INSERT INTO living VALUES ($name, $sum, $id)', {
+          $name: request.body.name,
+          $sum: request.body.sum,
+          $id: request.body.id
+        })
+      .then(() => {
+        console.log(request.params);
+        response.status(201).send()
       })
-    .then(() => {
-      response.send()
-    })
+  } else {
+    response.status(400).send()
+  }
 })
 
 app.get('/living', (request, response) => {
