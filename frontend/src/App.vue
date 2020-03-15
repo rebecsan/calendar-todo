@@ -318,6 +318,6 @@ video {
   background-color: #d6d2b5;
 }
 .copyright {
-  padding: 1rem;
+  padding: 1.5rem;
 }
 </style>

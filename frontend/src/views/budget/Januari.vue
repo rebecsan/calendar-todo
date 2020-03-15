@@ -131,6 +131,7 @@
     </div>
   </div>
 </template>
+-->
 
 <script>
 export default {
@@ -153,6 +154,7 @@ export default {
       livingSum: null,
       livingClosed: true,
       totalLiving: null,
+      test: "living",
 
       totalSum: null,
       initialValue: 0
@@ -174,14 +176,11 @@ export default {
       this.incomeClosed = true;
     },
     postIncomeData() {
-      fetch("http://localhost:3000/income", {
-        body:
-          '{"name": "' +
-          this.incomeName +
-          '"' +
-          ', "sum": "' +
-          this.incomeSum +
-          '"}',
+      fetch("http://localhost:3000/incomings", {
+        body: JSON.stringify({
+          name: this.incomeName,
+          sum: this.incomeSum
+        }),
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -191,14 +190,14 @@ export default {
       });
     },
     deleteIncomeData(id) {
-      fetch("http://localhost:3000/income/" + id, {
+      fetch("http://localhost:3000/incomings/" + id, {
         method: "DELETE"
       }).then(response => {
         this.renderIncome();
       });
     },
     renderIncome() {
-      fetch("http://localhost:3000/income")
+      fetch("http://localhost:3000/incomings")
         .then(response => response.json())
         .then(result => {
           this.incomings = result;
@@ -222,13 +221,11 @@ export default {
 
     postLivingData() {
       fetch("http://localhost:3000/living", {
-        body:
-          '{"name": "' +
-          this.livingName +
-          '"' +
-          ', "sum": "' +
-          this.livingSum +
-          '"}',
+        body: JSON.stringify({
+          test: this.test,
+          name: this.livingName,
+          sum: this.livingSum
+        }),
         method: "POST",
         headers: {
           "Content-Type": "application/json"
