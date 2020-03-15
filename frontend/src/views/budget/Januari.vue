@@ -176,7 +176,7 @@ export default {
       this.incomeClosed = true;
     },
     postIncomeData() {
-      fetch("http://localhost:3000/income", {
+      fetch("http://localhost:3000/incomings", {
         body: JSON.stringify({
           name: this.incomeName,
           sum: this.incomeSum
@@ -190,14 +190,14 @@ export default {
       });
     },
     deleteIncomeData(id) {
-      fetch("http://localhost:3000/income/" + id, {
+      fetch("http://localhost:3000/incomings/" + id, {
         method: "DELETE"
       }).then(response => {
         this.renderIncome();
       });
     },
     renderIncome() {
-      fetch("http://localhost:3000/income")
+      fetch("http://localhost:3000/incomings")
         .then(response => response.json())
         .then(result => {
           this.incomings = result;

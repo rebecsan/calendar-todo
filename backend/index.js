@@ -13,13 +13,17 @@ sqlite.open('database.sqlite').then(database_ => {
 })
 
 //Diana
+app.get('/:budget', (request, response) => {
+  database.all('SELECT * FROM ' + request.params.budget)
+    .then(rows => {
+      response.send(rows)
+    })
+})
 
-//Income
-app.post('/income', (request, response) => {
-  console.log(request.body);
+app.post('/:budget', (request, response) => {
   if (request.body.name && request.body.sum) {
     database.run(
-        'INSERT INTO living VALUES ($name, $sum, $id)', {
+        'INSERT INTO ' + request.params.budget + ' VALUES ($name, $sum, $id)', {
           $name: request.body.name,
           $sum: request.body.sum,
           $id: request.body.id
@@ -32,50 +36,8 @@ app.post('/income', (request, response) => {
   }
 })
 
-
-app.get('/income', (request, response) => {
-  database.all('SELECT * FROM incomings')
-    .then(rows => {
-      response.send(rows)
-    })
-})
-
-app.delete('/income/:id', (request, response) => {
-  database.run('DELETE FROM incomings WHERE id=$id', {
-      $id: request.params.id
-    })
-    .then(() => {
-      response.send()
-    })
-})
-
-// Living
-app.post('/living', (request, response) => {
-  if (request.body.name && request.body.sum) {
-    database.run(
-        'INSERT INTO living VALUES ($name, $sum, $id)', {
-          $name: request.body.name,
-          $sum: request.body.sum,
-          $id: request.body.id
-        })
-      .then(() => {
-        console.log(request.params);
-        response.status(201).send()
-      })
-  } else {
-    response.status(400).send()
-  }
-})
-
-app.get('/living', (request, response) => {
-  database.all('SELECT * FROM living')
-    .then(rows => {
-      response.send(rows)
-    })
-})
-
-app.delete('/living/:id', (request, response) => {
-  database.run('DELETE FROM living WHERE id=$id', {
+app.delete('/:budget/:id', (request, response) => {
+  database.run('DELETE FROM ' + request.params.budget + ' WHERE id=$id', {
       $id: request.params.id
     })
     .then(() => {
